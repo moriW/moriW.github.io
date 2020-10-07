@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+
+</head>
+
+<body>
+    <div id="app">
+        <el-row type="flex" align="middle" justify="center">
+            <el-col :span="6">
+                <div id="animation" ref="animation1"></div>
+            </el-col>
+            <el-col :span="12">
+                <p style="text-align: center; font-size: 20pt;">
+                    <!-- <span>{{ month }}</span>M / <span>{{ day }}</span>D -->
+                    Fall in Love <span>{{ day }}</span> Days
+                </p>
+            </el-col>
+            <el-col :span="6">
+                <div id="animation" ref="animation2"></div>
+            </el-col>
+        </el-row>
+    </div>
+
+    </div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.3/lottie.min.js" type="text/javascript"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                day: 0,
+                anim1: null,
+                anim2: null,
+            }
+        },
+        mounted() {
+            this.anim1 = lottie.loadAnimation({
+                container: this.$refs.animation1,
+                renderer: "svg",
+                loop: true,
+                autoplay: true,
+                path: "./favorite_black.json", //动画json
+            });
+            this.anim2 = lottie.loadAnimation({
+                container: this.$refs.animation2,
+                renderer: "svg",
+                loop: true,
+                autoplay: true,
+                path: "./favorite_black.json", //动画json
+            });
+
+
+            let startDate = new Date("2020-04-24");
+            let currentDate = new Date();
+            var diffSecond = currentDate.getTime() - startDate.getTime();
+            var diffDay = Math.floor(diffSecond / (24 * 3600 * 1000));
+
+            // this.month = Math.floor(diffDay / 30);
+            // this.day = diffDay - this.month * 30;
+            this.day = diffDay
+        }
+    })
+</script>
+
+</html>
